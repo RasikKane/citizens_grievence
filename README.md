@@ -1,6 +1,9 @@
 # Predict the importance of citizen's grievences
 given dataset contains grievances of various people living in a country. Notebook predicts the importance of the grievance with respect to various articles, constitutional declarations, enforcement, resources, and so on, to help the government prioritize which ones to deal with and when.
 
+## Data Quality Plan
+**After initial data analytics, following insights are drawn for feature data cleaning and wrangling**
+
 | Features                  | Data<br>Classification| Subtype    | Description Or<br>domain significance  | Data quality issue |Solution Strategy |
 |:------------------------- |:------------------ |:---------- |:-----------|:-------------- |:-------------- | 
 | appno                                 | catagorical        | nominal    | application number<br><br>e.g. 53865/11|**NO_SIG**<br>13467 unique values<br>No nulls|**Drop**<br>|
