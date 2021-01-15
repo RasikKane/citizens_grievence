@@ -16,11 +16,11 @@ given dataset contains grievances of various people living in a country. Noteboo
 | ecli                                  | catagorical        | nominal    | database case ID<br><br>e.g. ECLI:CE:ECHR:2015:<br>.1203JUD005386511|**NO_SIG**<br>primary key<br>no contribution<br>in prediction|**Drop**<br>|
 | introductiondate                      | numeric            | continuous<br>datetime   | date of introduction|**NO_SIG**<br>92% null values|**Drop**<br>|
 | itemid                                | catagorical        | nominal    | database item ID<br><br>e.g. 001-108659|**NO_SIG**<br>primary key<br>no contribution<br>in prediction|**Drop**<br>|
-| judgementdate                         | numeric            | continuous<br>datetime   | date of Judgement|**SIG**<br>No null values<br>2088 unique<br>entries in<br>13638 samples|**Keep**<br>|
-| kpdate                                | numeric            | continuous<br>datetime   | date of closure|**SIG**<br>No null values<br>2088 unique<br>entries in<br>13638 samples|**Keep**<br>|
+| judgementdate                         | numeric            | continuous<br>datetime   | date of Judgement|**SIG**<br>No null values<br>2088 unique<br>entries in<br>13638 samples|**Keep**<br><br>seperate into quarter, month, year, weekday|
+| kpdate                                | numeric            | continuous<br>datetime   | date of closure|**SIG**<br>No null values<br>2088 unique<br>entries in<br>13638 samples|**Drop**<br>Duplicate of judgementdate|
 | languageisocode                       | catagorical        | nominal    | Language<br><br>e.g. ENG|**NO_SIG**<br>1 unique value<br>no null|**Drop**<br>|
-| originatingbody                       | catagorical        | nominal    | Party originating<br>case<br><br>e.g. ENG|**SIG**<br>13 unique value<br>no null|**Keep**<br>|
-| originatingbody_name                  | catagorical        | nominal    | Name of party<br>originating<br>case<br><br>e.g. ENG|**HCR**<br>Corr->1 with<br>'originatingbody'|**Drop**<br>|
+| originatingbody                       | catagorical        | nominal    | Party originating<br>case<br><br>e.g. [29,1..]|**SIG**<br>13 unique value<br>no null|**Keep**<br><br>typecast as categorical|
+| originatingbody_name                  | catagorical        | nominal    | Name of party<br>originating<br>case<br><br>e.g. Fith Section Committee,<br>Second Section|**HCR**<br>Corr->1 with<br>'originatingbody'|**Drop**<br>|
 | originatingbody_type                  | catagorical        | nominal    | Name of party<br>originating<br>case|**NO_SIG**<br>1 unique value<br>no null|**Drop**<br>|
 | parties.0                             | catagorical        | nominal    | Name of party<br>filing<br>case|**NO_SIG**<br>12535 unique values<br>no null|**Drop**<br>|
 | parties.1                             | catagorical        | nominal    | Name of country/s<br>against whome<br>case filed|**NO_SIG**<br>107 unique values<br>no null<br>majority of values<br>correlate with<br>'country.alpha2'|**Drop**<br>|
@@ -34,7 +34,7 @@ given dataset contains grievances of various people living in a country. Noteboo
 | respondentOrderEng                    | catagorical        | nominal    | respondent information<br>numreic label<br>e.g. 49|**HCR**<br>Corr->1 with<br>'country.alpha2'|**Drop**<br>|
 | separateopinion                       | catagorical        | nominal    | opinion on a case<br> e.g. {TRUE, FALSE}|**SIG**<br>No null values<br>Boolean feature|**Keep**<br>|
 | sharepointid                          | catagorical        | nominal    | sharepoint ID<br><br>e.g. 359124|**NO_SIG**<br>primary key<br>no contribution<br>in prediction|**Drop**<br>|
-| typedescription                       | catagorical        | nominal    | type_description {12- 19}|**SIG**<br>No null values<br>5 distinct values|**Keep**<br>|
+| typedescription                       | catagorical        | nominal    | type_description {12- 19}|**SIG**<br>No null values<br>5 distinct values|**Keep**<br><br>typecast as categorical|
 | issue.{0-26}                          | catagorical        | nominal    | description with respect<br>to an issue|**SIG**<br>1 hot encoded|**Keep**<br>|
 | article={27 numbers}                  | catagorical        | nominal    | type of article|**SIG**<br>1 hot encoded|**Keep**<br>|
 | documentcollectionid=<br>CASELAW      | catagorical        | nominal    | document category=CASELAW   |**NO_SIG**<br>1 unique value<br>no null|**Drop**<br>|
@@ -43,8 +43,8 @@ given dataset contains grievances of various people living in a country. Noteboo
 | documentcollectionid=<br>CHAMBER      | catagorical        | nominal    | document category=CHEMBERS|**SIG**<br>1 hot encoded<br>from feature<br>'doctypebranch'|**Keep**<br>|
 | documentcollectionid=<br>COMMITTEE    | catagorical        | nominal    | document category=COMMITTEE|**SIG**<br>1 hot encoded<br>from feature<br>'doctypebranch'|**Keep**<br>|
 | documentcollectionid=<br>GRANDCHAMBER | catagorical        | nominal    | document category=GRANDCHEMBER|**SIG**<br>1 hot encoded<br>from feature<br>'doctypebranch'|**Keep**<br>|
-| applicability=<br>{61 numbers}        | catagorical        | nominal    |  applicability of case|**SIG**<br>3 unique value<br>no null|**Keep**<br>|
+| applicability=<br>{61 numbers}        | catagorical        | nominal    |  applicability of case|**SIG**<br>1 hot encoded|**Keep**<br>|
 | ccl_article=<br>{25 Type}             | catagorical        | nominal    | reliability of<br>CCL article type<br>e.g. {-1,0,1}|**SIG**<br>1 hot encoded|**Keep**<br>|
 | paragraphs=<br>{132 numbers}          | catagorical        | nominal    | category   |**SIG**<br>1 hot encoded|**Keep**<br>|
-| importance                            | catagorical        | nominal    | Target variable<br>0-5|**SIG**<br>target variable|**Keep**<br>|
+| importance                            | catagorical        | ordinal    | Target variable<br>0-5|**SIG**<br>target variable|**Keep**<br>|
 
