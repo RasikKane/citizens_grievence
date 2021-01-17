@@ -1,0 +1,13 @@
+predict_importance_EDA.ipynb contains detailed EDA and method to create prediction model. Model runs on test data to obtain predictions.
+
+**EDA**
+* unique values, percent null values in each feature is observed
+* Features with >99% null are dropped
+
+**Feature engineering**
+* Datetime feature is dissagregated into month, quarter, day of week, year
+* sklearn pipeline is used to onehot-encode and descretize necessary features
+
+**Prediction**
+* Logistic regression is used to predict target class 'importance'
+* Hyperparameters for model are tunned using grid search
