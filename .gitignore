@@ -1,11 +1,11 @@
 .ipynb_checkpoints
-submission
-reference notebooks
+citizens_grievances/submission
+citizens_grievances/reference notebooks
 *.zip
 *.log
-predict_importance_skl_tf.ipynb
-predict_importance_sklearn.ipynb
-predict_importance_tensorflow2.ipynb
-dataset/submission_tf2.csv
-dataset/submission_tf.csv
-dataset/X.csv
+citizens_grievances/predict_importance_skl_tf.ipynb
+citizens_grievances/predict_importance_sklearn.ipynb
+citizens_grievances/predict_importance_tensorflow2.ipynb
+citizens_grievances/dataset/submission_tf2.csv
+citizens_grievances/dataset/submission_tf.csv
+citizens_grievances/dataset/X.csv
